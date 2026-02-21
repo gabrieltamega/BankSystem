@@ -4,14 +4,24 @@ import java.time.LocalDate;
 
 import model.entities.Taxable;
 
-public class CheckingAccount extends Account implements Taxable {
+public class PlusCheckingAccount extends Account implements Taxable {
 
-	public CheckingAccount() {
+	public PlusCheckingAccount() {
 		super();
 	}
 
-	public CheckingAccount(Integer number, LocalDate openingDate, Double balance) {
+	public PlusCheckingAccount(Integer number, LocalDate openingDate, Double balance) {
 		super(number, openingDate, balance);
+	}
+
+	@Override
+	protected double withdrawFee() {
+		return 0.50;
+	}
+	
+	@Override
+	protected double accountFee() {
+		return 6.80;
 	}
 
 	@Override
@@ -37,7 +47,15 @@ public class CheckingAccount extends Account implements Taxable {
 	}
 
 	@Override
+	protected double yield() {
+		return 0.0055;
+	}
+
+	@Override
 	protected void applyMonthlyUpdate() {
+		double balance = getBalance();
+		double interest = balance * super.yield();
+		super.addToBalance(interest);
 	}
 
 }

@@ -4,11 +4,9 @@ import java.time.LocalDate;
 
 public class SavingsAccount extends Account {
 
-	private Double yield = 0.0041;
-
-	public SavingsAccount(Integer number, Double balance, String client, LocalDate openingDate,
-			LocalDate lastProcessingDate) {
-		super(number, balance, client, openingDate, lastProcessingDate);
+	
+	public SavingsAccount(Integer number, LocalDate openingDate, Double balance) {
+		super(number, openingDate, balance);
 	}
 
 	public void withdraw(double value) {
@@ -21,7 +19,7 @@ public class SavingsAccount extends Account {
 		ca.deposit(value);
 
 	}
-	
+
 	public void deposit(double value) {
 		super.deposit(value);
 	}
@@ -29,8 +27,9 @@ public class SavingsAccount extends Account {
 	@Override
 	protected void applyMonthlyUpdate() {
 		double balance = getBalance();
-		double interest = balance * yield;
+		double interest = balance * super.yield();
 		super.addToBalance(interest);
 	}
+
 
 }

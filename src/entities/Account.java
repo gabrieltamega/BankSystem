@@ -16,12 +16,12 @@ public abstract class Account {
 	public Account() {
 	}
 
-	public Account(Integer number, Double balance, String client, LocalDate openingDate, LocalDate lastProcessingDate) {
+	public Account(Integer number, LocalDate openingDate, Double balance) {
+		super();
 		this.number = number;
-		this.balance = balance;
-		this.client = client;
 		this.openingDate = openingDate;
-		this.lastProcessingDate = lastProcessingDate;
+		this.balance = balance;
+		this.lastProcessingDate = openingDate;
 	}
 
 	public Integer getNumber() {
@@ -56,7 +56,19 @@ public abstract class Account {
 		if (balance < value) {
 			throw new IllegalArgumentException("Insufficient Balance");
 		}
-		balance -= value;
+		balance -= value + withdrawFee();
+	}
+
+	protected double withdrawFee() {
+		return 1.50;
+	}
+
+	protected double accountFee() {
+		return 5.00;
+	}
+	
+	protected double yield() {
+		return 0.0041;
 	}
 
 	public void deposit(double value) {
@@ -71,11 +83,17 @@ public abstract class Account {
 		target.deposit(value);
 	}
 
-	protected abstract void applyMonthlyUpdate();
-
 	protected void addToBalance(double value) {
-		balance += value;
+		double balance = getBalance();
+		if (balance < accountFee()) {
+			addToBalance(-balance);
+		}
+		double feeMonth = balance - accountFee();
+		addToBalance(feeMonth);
+
 	}
+
+	protected abstract void applyMonthlyUpdate();
 
 	public void processMonth(LocalDate currentDate) {
 		long months = ChronoUnit.MONTHS.between(lastProcessingDate, currentDate);

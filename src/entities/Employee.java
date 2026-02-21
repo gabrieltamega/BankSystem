@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client {
+public class Employee {
 
 	private String id;
 	private String name;
@@ -11,19 +11,19 @@ public class Client {
 	private String email;
 	private String phoneNumber;
 	private String password;
-	private List<Account> accounts = new ArrayList<>();
+	
+	List<String> listEmp = new ArrayList<>();
 
-	public Client() {
+	public Employee() {
 	}
 
-	public Client(String id, String name, String cpf, String email, String phoneNumber, String password) {
+	public Employee(String id, String name, String cpf, String email, String phoneNumber, String password) {
 		this.id = id;
 		this.name = name;
 		this.cpf = cpf;
 		this.email = email;
 		this.phoneNumber = phoneNumber;
 		this.password = password;
-
 	}
 
 	public String getId() {
@@ -65,8 +65,7 @@ public class Client {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -75,19 +74,6 @@ public class Client {
 		this.password = password;
 	}
 
-	public void addAccount(Account accountType) {
-		accounts.add(accountType);
-	}
-
-	@Override
-	public String toString() {
-		return "Client Id: " + id + "\nName: " + name + "\nCPF: " + cpf + "\nEmail: " + email + "\nContact : "
-				+ phoneNumber + "\nAccounts:" + accounts;
-	}
-	
-	public String toStringList() {
-		return "Client Id: " + id + " // Name: " + name + " // CPF: " + cpf + "\n";
-	}
 	
 	
 }
