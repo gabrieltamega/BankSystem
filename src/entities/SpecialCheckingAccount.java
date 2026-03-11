@@ -2,39 +2,39 @@ package entities;
 
 import java.time.LocalDate;
 
-public class CheckingAccount extends Account {
+public class SpecialCheckingAccount extends Account {
 
-	public CheckingAccount() {
+	public SpecialCheckingAccount() {
 		super();
 	}
 
-	public CheckingAccount(String number, LocalDate openingDate, Double balance) {
+	public SpecialCheckingAccount(String number, LocalDate openingDate, Double balance) {
 		super(number, openingDate, balance);
 	}
 
 	@Override
 	protected double withdrawFee() {
-		return 2.50;
+		return 1.20;
 	}
 
 	@Override
 	protected double accountFee() {
-		return 8.00;
+		return 14.00;
 	}
 
 	@Override
 	protected double yield() {
-		return 0.0106;
+		return 0.0146;
 	}
 
 	@Override
 	protected double overdraft() {
-		return 0.0260;
+		return 0.0220;
 	}
 	
 	@Override
 	protected double limitOverdraft() {
-		return 1000.00;
+		return 4000.00;
 	}
 
 }

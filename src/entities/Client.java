@@ -3,7 +3,7 @@ package entities;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Client {
+public class Client implements Comparable<Client> {
 
 	private String id;
 	private String name;
@@ -65,8 +65,7 @@ public class Client {
 	public void setPhoneNumber(String phoneNumber) {
 		this.phoneNumber = phoneNumber;
 	}
-	
-	
+
 	public String getPassword() {
 		return password;
 	}
@@ -80,14 +79,22 @@ public class Client {
 	}
 
 	@Override
+	public int compareTo(Client other) {
+		int result = this.name.compareToIgnoreCase(other.name);
+		if (result == 0) {
+			return this.cpf.compareTo(other.cpf);
+		}
+		return result;
+	}
+
+	@Override
 	public String toString() {
 		return "Client Id: " + id + "\nName: " + name + "\nCPF: " + cpf + "\nEmail: " + email + "\nContact : "
 				+ phoneNumber + "\nAccounts:" + accounts;
 	}
-	
+
 	public String toStringList() {
-		return "Client Id: " + id + " // Name: " + name + " // CPF: " + cpf + "\n";
+		return "Name: " + name + "	// Client Id: " + id + "	  // CPF: " + cpf + "\n";
 	}
-	
-	
+
 }

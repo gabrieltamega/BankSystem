@@ -42,12 +42,12 @@ public class EmployeeService {
 
 	public void savingEmployees(String path) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-			bw.write("Id, Name, CPF, Email, Phone, Password");
+			bw.write("Id,Name,CPF,Email,Phone,Password");
 			bw.newLine();
 
 			for (Employee e : employees) {
-				bw.write(e.getId() + ", " + e.getName() + ", " + e.getCpf() + ", " + e.getEmail() + ", "
-						+ e.getPhoneNumber() + ", " + e.getPassword());
+				bw.write(e.getId() + "," + e.getName() + ", " + e.getCpf() + "," + e.getEmail() + ","
+						+ e.getPhoneNumber() + "," + e.getPassword());
 				bw.newLine();
 			}
 			System.out.println("File saved successfully at: " + path);

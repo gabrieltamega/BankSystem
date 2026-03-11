@@ -2,13 +2,13 @@ package entities;
 
 import java.time.LocalDate;
 
-public class SavingsAccount extends Account {
+public class PremiumCheckingAccount extends Account {
 
-	public SavingsAccount() {
+	public PremiumCheckingAccount() {
 		super();
 	}
 
-	public SavingsAccount(String number, LocalDate openingDate, Double balance) {
+	public PremiumCheckingAccount(String number, LocalDate openingDate, Double balance) {
 		super(number, openingDate, balance);
 	}
 
@@ -19,17 +19,22 @@ public class SavingsAccount extends Account {
 
 	@Override
 	protected double accountFee() {
-		return 0.00;
+		return 32.00;
 	}
 
 	@Override
 	protected double yield() {
-		return 0.0120;
+		return 0.0187;
 	}
 
 	@Override
 	protected double overdraft() {
-		return 0.0160;
+		return 0.0210;
+	}
+	
+	@Override
+	protected double limitOverdraft() {
+		return 10000.00;
 	}
 
 }

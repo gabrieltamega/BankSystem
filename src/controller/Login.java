@@ -1,5 +1,7 @@
 package controller;
 
+import java.util.Scanner;
+
 import application.MenuClient;
 import application.MenuEmployee;
 import entities.Client;
@@ -11,14 +13,16 @@ public class Login {
 
 	private EmployeeService es = new EmployeeService();
 	private ClientService cs = new ClientService();
+	private Scanner sc;
 
 	public Login() {
 	}
 
-	public Login(EmployeeService es, ClientService cs) {
+	public Login(EmployeeService es, ClientService cs, Scanner sc) {
 		super();
 		this.es = es;
 		this.cs = cs;
+		this.sc = sc;
 	}
 
 	public boolean authenticate(int type, String login, String password) {
@@ -27,8 +31,8 @@ public class Login {
 			Employee foundE = es.findById(login);
 
 			if (foundE != null && foundE.getPassword().equals(password)) {
-				MenuEmployee me = new MenuEmployee();
-				me.menuEmployee(cs);
+				MenuEmployee me = new MenuEmployee(sc, cs);
+				me.displayEmployeeMenu();
 				return true;
 			}
 
@@ -36,7 +40,7 @@ public class Login {
 		} else if (type == 2) {
 			Client foundC = cs.findByCpf(login);
 			if (foundC != null && foundC.getPassword().equals(password)) {
-				MenuClient mc = new MenuClient();
+				MenuClient mc = new MenuClient(sc, cs);
 				mc.menuClient();
 				return true;
 			}

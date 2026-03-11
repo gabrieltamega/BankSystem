@@ -5,16 +5,16 @@ import java.io.BufferedWriter;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
+import java.util.Set;
+import java.util.TreeSet;
 
 import entities.Client;
 
 public class ClientService {
 
 	String path = "clients.csv";
-	private List<Client> clients = new ArrayList<>();
+	private Set<Client> clients = new TreeSet<>();
 
 	public ClientService() {
 		super();
@@ -35,7 +35,8 @@ public class ClientService {
 		}
 		return sb.toString();
 	}
-
+	
+	
 	public Client findByCpf(String cpf) {
 		for (Client c : clients) {
 			if (c.getCpf().equals(cpf)) {
@@ -74,12 +75,12 @@ public class ClientService {
 
 	public void savingClients(String path) {
 		try (BufferedWriter bw = new BufferedWriter(new FileWriter(path))) {
-			bw.write("Id, Name, CPF, Email, Phone, Password");
+			bw.write("Id,Name,CPF,Email,Phone,Password");
 			bw.newLine();
 
 			for (Client c : clients) {
-				bw.write(c.getId() + "," + c.getName() + ", " + c.getCpf() + ", " + c.getEmail() + ", "
-						+ c.getPhoneNumber() + ", " + c.getPassword());
+				bw.write(c.getId() + "," + c.getName() + "," + c.getCpf() + "," + c.getEmail() + ","
+						+ c.getPhoneNumber() + "," + c.getPassword());
 				bw.newLine();
 			}
 			System.out.println("File saved successfully at: " + path);
